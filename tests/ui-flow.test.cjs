@@ -14,6 +14,9 @@ class Element{
 doc=new Element('document');doc.innerHTML=fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8');doc.createElement=t=>new Element(t);doc.hidden=false;let timers=[],id=0,now=0,mem=new Map(),sounds=[];
 const ctx={document:doc,window:{scrollTo(){},},matchMedia:()=>({matches:true}),localStorage:{getItem:k=>mem.get(k)||null,setItem:(k,v)=>mem.set(k,v)},setTimeout:(f,ms)=>{timers.push({f,at:now+ms,id:++id});return id},clearTimeout:id=>timers=timers.filter(t=>t.id!==id),GameAudio:{enabled:false,activate(){this.enabled=true;return true},settings(){},play:s=>sounds.push(s)},console};vm.createContext(ctx);const run=s=>vm.runInContext(s,ctx);for(const f of ['data.js','engine.js','game.js'])vm.runInContext(fs.readFileSync(require('node:path').join(__dirname,'../'+f),'utf8'),ctx,{filename:f});
 function advance(ms){let end=now+ms;while(timers.some(t=>t.at<=end)){timers.sort((a,b)=>a.at-b.at);let t=timers.shift();now=t.at;t.f()}now=end}
+assert.equal(run('GameAudio.enabled'),false);
+run('handle({target:app.querySelector("[data-help]")})');assert.equal(run('GameAudio.enabled'),false,'遊び方を開いてもBGMはまだ始まらない');run('modal.close()');
+run('handle({target:app.querySelector("[data-adventure]")})');assert.equal(run('GameAudio.enabled'),true,'冒険開始操作で音声を有効化');run('go("title")');
 assert.equal(run('screen'),'title');assert(doc.querySelector('[data-go="stages"]'));run('go("stages")');assert.equal(doc.querySelectorAll('[data-start]').length,10);
 for(let level=1;level<=10;level++){
  run(`start(${level})`);assert.equal(run('screen'),'game');assert.equal(doc.querySelectorAll('[data-card]').length,(level+4)*2);
