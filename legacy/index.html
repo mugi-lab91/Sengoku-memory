@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f5f0e5"><title>戦国めもりー | 武将とめぐる、お宝さがし</title><link rel="stylesheet" href="style.css"><script src="game.js" defer></script></head>
+<body><header><a class="brand" href="./index.html"><span class="brand-mark">戦</span>戦国めもりー<small>SENGOKU MEMORY</small></a><button id="help" class="plain">遊び方 <span>?</span></button></header>
+<main><section class="intro"><div class="eyebrow">めくって、学んで、天下をめざせ。</div><h1>その一枚が、<br class="mobile">歴史の出会い。</h1><p>武将とゆかりのお宝をそろえて、<br class="mobile">5つの家紋を集めよう。</p><div class="chapter"><span>壱</span> 武将とお宝の章</div></section>
+<section class="game-layout"><aside class="collection"><div class="section-label">COLLECTION</div><h2>家紋あつめ帖 <span id="collection-count">0 / 5</span></h2><p>クイズに正解すると家紋を獲得！</p><div id="crests"></div><div class="note"><span>✧</span><p>同じ絵を探すのではなく、<br><b>「武将 × ゆかりのお宝」</b><br>の組み合わせを見つけよう。</p></div></aside>
+<section class="play-area" aria-label="神経衰弱ゲーム"><div class="toolbar"><div class="status"><span>めくった回数 <b id="moves">0</b></span><span>そろったペア <b id="pairs">0<small> / 5</small></b></span></div><button id="reset" class="plain">↻ はじめから</button></div><div id="board" class="board"></div><p id="message" class="message" role="status" aria-live="polite">まずは、気になるカードを2枚めくってみよう。</p></section></section>
+<footer><span>五人の武将、五つの物語。</span><span>戦国めもりー <small>― 遊んで学ぶ、日本の歴史 ―</small></span></footer></main>
+<dialog id="modal"><button class="close" id="close-modal" aria-label="閉じる">×</button><div id="modal-content"></div></dialog></body></html>

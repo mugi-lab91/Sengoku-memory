@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+._*
+
+# Local dependencies / temporary output
+node_modules/
+.tmp/
+tmp/
+*.log
+
+# Local credentials
+.env
+.env.*
+!.env.example
