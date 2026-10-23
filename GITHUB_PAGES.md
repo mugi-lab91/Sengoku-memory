@@ -82,3 +82,12 @@ node tests/audio.test.cjs
 `check-pages.cjs` は `/Sengoku-memory/` 配下でHTML・CSS・画像の相対URLが正しく解決されることを確認します。
 
 GitHubの公式手順：<https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site>
+
+
+## 「Sengoku-memory」という白い説明ページが出る場合
+
+2026年10月24日の調査では、ルートの `index.html` と画像パスは正しく、公開元も `main` のルートでした。一方、ゲーム追加後のPages実行は、公開時のIDトークン取得タイムアウトで失敗していました。そのため、READMEしかなかった初期版が公開URLに残っていました。
+
+この場合、READMEやゲームデータを削除する必要はありません。Actions画面の最新の「pages build and deployment」を開き、buildだけでなく **deployも成功したか**を確認してください。認証トークンの取得タイムアウトなら **Re-run failed jobs** で再実行します。エラーが繰り返す場合は、その実行のログを確認し、設定や権限の問題と一時的な通信障害を区別します。
+
+公開URLにゲームのタイトルが表示され、冒険を始められることまで確認して、公開完了とします。公開に失敗したまま古いページが見えている状態は、ブラウザーの再読み込みだけでは直りません。

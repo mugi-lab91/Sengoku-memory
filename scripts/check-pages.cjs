@@ -14,6 +14,10 @@ function check(reference, from = 'index.html') {
 }
 assert(fs.existsSync(path.join(root, '.nojekyll')), '.nojekyll が必要です');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+assert(html.includes('<main id="app">'), 'ルートのindex.htmlはゲームの起動ページである必要があります');
+for (const script of ['data.js', 'engine.js', 'audio.js', 'game.js']) {
+  assert(html.includes('src="' + script + '"'), 'ゲーム起動用のスクリプトがありません: ' + script);
+}
 for (const m of html.matchAll(/(?:src|href)="([^"]+)"/g)) check(m[1]);
 const css = fs.readFileSync(path.join(root, 'style.css'), 'utf8');
 for (const m of css.matchAll(/url\(['"]?([^)'"\s]+)['"]?\)/g)) check(m[1], 'style.css');
